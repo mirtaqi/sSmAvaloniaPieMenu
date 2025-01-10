@@ -1,0 +1,16 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        >
+	<Styles.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+
+				<MergeResourceInclude Source="/Themes/PieShape.axaml"/>
+				<MergeResourceInclude Source="/Themes/RadialMenuItem.axaml"/>
+				<MergeResourceInclude Source="/Themes/RadialMenuCentralItem.axaml"/>
+
+				<MergeResourceInclude Source="/Themes/RadialMenu.axaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Styles.Resources>
+</Styles>

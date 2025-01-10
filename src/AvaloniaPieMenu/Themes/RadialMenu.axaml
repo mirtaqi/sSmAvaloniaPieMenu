@@ -1,0 +1,87 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AvaloniaPieMenu.Controls">
+	<ControlTheme TargetType="controls:RadialMenu" x:Key="{x:Type controls:RadialMenu}">
+		<!-- Default RadialMenu style (while closed) -->
+		<Setter Property="Opacity" Value="0"/>
+		<Setter Property="IsVisible" Value="{Binding RelativeSource={RelativeSource Self},Path=IsOpen}"/>
+		<Setter Property="Height" Value="300"/>
+		<Setter Property="Width" Value="300"/>
+        <!--<Setter Property="BorderThickness" Value="8"/>
+		<Setter Property="BorderBrush" Value="DarkOrchid"></Setter>-->
+		<!--<Setter Property="RenderTransform">
+			<Setter.Value>
+				<TransformGroup>
+					<ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
+					<RotateTransform CenterX="150" CenterY="150" Angle="-50"/>
+				</TransformGroup>
+			</Setter.Value>
+		</Setter>-->
+		<Style Selector="^[IsOpen=True]">
+           
+			<Setter Property="Transitions">
+                <Setter.Value>
+                    <Transitions>
+                        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.3"></TransformOperationsTransition>
+                        <DoubleTransition Property="Opacity" Duration="0:0:0.3"></DoubleTransition>
+                       
+                    </Transitions>
+                </Setter.Value>
+            </Setter>
+			<Setter Property="Opacity" Value="1"></Setter>
+            <Setter Property="RenderTransform" Value="rotate(0deg) scale(1)">
+
+            </Setter>
+		</Style>
+        <Style Selector="^[IsOpen=False]">
+            <Setter Property="RenderTransform" Value="rotate(45deg) scale(0.5)">
+               
+            </Setter>
+            <Setter Property="Transitions">
+                <Setter.Value>
+                    <Transitions>
+                        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.3"></TransformOperationsTransition>
+                        <DoubleTransition Property="Opacity" Duration="0:0:0.3"></DoubleTransition>
+                        <BoolTransition Property="IsVisible" Duration="0:0:0.3"></BoolTransition>
+                    </Transitions>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Opacity" Value="0"></Setter>
+        </Style>
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="controls:RadialMenu">
+					<Grid >
+
+						
+						<!-- RadialMenu background -->
+						<Ellipse Fill="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"/>
+
+						<!-- Content repitition (for items around) -->
+						 
+						<!--<ItemsControl ItemsSource="{TemplateBinding Content}">
+							<ItemsControl.ItemsPanel>
+								<ItemsPanelTemplate>
+									<Grid/>
+								</ItemsPanelTemplate>
+							</ItemsControl.ItemsPanel>
+						</ItemsControl>-->
+						<ItemsPresenter Name="PART_ItemsPresenter"
+                                        
+                                        Margin="{TemplateBinding Padding}">
+							 <ItemsPresenter.ItemsPanel>
+								 <ItemsPanelTemplate>
+									 <Canvas></Canvas>
+                                 </ItemsPanelTemplate>
+                             </ItemsPresenter.ItemsPanel>
+                        </ItemsPresenter>
+						<!-- Content (for central item) -->
+						<ContentPresenter Content="{TemplateBinding CentralItem}"/>
+
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</ControlTheme>
+</ResourceDictionary>

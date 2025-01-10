@@ -1,0 +1,56 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:AvaloniaPieMenu.Controls">
+	<ControlTheme TargetType="controls:RadialMenuCentralItem" x:Key="{x:Type controls:RadialMenuCentralItem}">
+ 
+		<Style Selector="^:pointerover">
+            <Setter Property="BorderBrush" Value="#999"/>
+            <Setter Property="Panel.ZIndex" Value="10"/>
+		</Style>
+        <Style Selector="^:pressed">
+                <Setter Property="BorderBrush" Value="#666"/>
+                <Setter Property="Panel.ZIndex" Value="10"/>
+        </Style>
+        <Style Selector="^[IsEnabled=False]">
+            <Setter Property="BorderBrush" Value="#666"/>
+            <Setter Property="Panel.ZIndex" Value="10"/>
+        </Style>
+
+		<!-- Default RadialMenuCentralItem style -->
+		<Setter Property="Width" Value="60"/>
+		<Setter Property="Height" Value="60"/>
+		<Setter Property="HorizontalAlignment" Value="Center"/>
+		<Setter Property="VerticalAlignment" Value="Center"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="Foreground" Value="#111"/>
+		<Setter Property="BorderBrush" Value="#CCC"/>
+		<Setter Property="BorderThickness" Value="2"/>
+		<Setter Property="Panel.ZIndex" Value="0"/>
+
+		<!-- RadialMenuCentralItem template -->
+		<Setter Property="Template">
+			<Setter.Value>
+
+				<ControlTemplate TargetType="controls:RadialMenuCentralItem">
+					<Grid>
+
+						<!-- Rounded button -->
+						<Ellipse
+                            Stroke="{TemplateBinding BorderBrush}"
+                            StrokeThickness="{Binding BorderThickness.Top, RelativeSource={RelativeSource AncestorType=controls:RadialMenuCentralItem}}"
+                            Fill="{TemplateBinding Background}"/>
+
+						<!-- Content -->
+						<ContentPresenter
+                            Content="{TemplateBinding Content}"
+                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalAlignment}"/>
+
+					</Grid>
+				</ControlTemplate>
+
+			</Setter.Value>
+		</Setter>
+
+	</ControlTheme>
+</ResourceDictionary>
