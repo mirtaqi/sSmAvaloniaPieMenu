@@ -30,7 +30,6 @@
 			<Setter Property="Foreground" Value="#AFAFAF"/>
 		</Style>
 
-		<Setter Property="Background" Value="#990055FF"></Setter>
 
 		<!-- Default RadialMenuItem style -->
 		<Setter Property="Width" Value="300"/>
