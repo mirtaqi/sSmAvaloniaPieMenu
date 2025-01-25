@@ -12,7 +12,10 @@ namespace AvaloniaPieMenu.Controls;
 /// </summary>
 internal class PieShape : Shape
 {
-
+    public PieShape()
+    {
+        //this.RenderTransform = new RotateTransform(45);
+    }
     public static readonly StyledProperty<  double> InnerRadiusProperty =
         AvaloniaProperty.Register<PieShape, double>(
             nameof(InnerRadius),defaultBindingMode:BindingMode.TwoWay);
@@ -148,6 +151,7 @@ internal class PieShape : Shape
             DrawGeometry(context);
         }
 
+       
         // Freezes the geometry for performance benefits
         //geometry.Freeze();
             
