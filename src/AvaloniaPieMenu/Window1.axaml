@@ -10,7 +10,7 @@
         
         <Path Canvas.Left="100" Canvas.Top="100" >
             <Path.Fill>
-                <RadialGradientBrush Center="0%,0%" GradientOrigin="0%,0%" RadiusX="100%" RadiusY="200%">
+                <RadialGradientBrush Center="0%,0%" GradientOrigin="0%,0%" RadiusX="100%" RadiusY="575%%">
                     <RadialGradientBrush.GradientStops>
                         <GradientStop Offset="0" Color="Red"></GradientStop>
                         <GradientStop Offset="0.3" Color="OrangeRed"></GradientStop>
@@ -32,9 +32,9 @@
                         <PathFigure StartPoint="0,0"  IsFilled="True">
                             <PathFigure.Segments>
                                 <LineSegment Point="100,0"></LineSegment>
-                                <ArcSegment Point="86.60254037844,50" 
+                                <ArcSegment Point="98.480775301,17.3648177666" 
                                             IsLargeArc="False" 
-                                            RotationAngle="30" Size="100,100" 
+                                            RotationAngle="0" Size="100,100" 
                                             SweepDirection="Clockwise"></ArcSegment>
                                 <LineSegment Point="0,0"></LineSegment>
                             </PathFigure.Segments>

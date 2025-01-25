@@ -36,7 +36,7 @@
 				</controls:RadialMenu.CentralItem>
 
 				 
-					<controls:RadialMenuItem Command="{Binding Test1}">
+					<!--<controls:RadialMenuItem Command="{Binding Test1}">
 						<WrapPanel Orientation="Vertical">
 							<Rectangle Width="25" Height="25">
 								<Rectangle.Fill>
@@ -74,7 +74,7 @@
 							</TextBlock>
 						</WrapPanel>
 					</controls:RadialMenuItem>
-
+-->
 					<controls:RadialMenuItem Command="{Binding Test4}">
 						<WrapPanel Orientation="Vertical">
 							<Rectangle Width="20" Height="25">
@@ -100,7 +100,30 @@
 							</TextBlock>
 						</WrapPanel>
 					</controls:RadialMenuItem>
-
+                <controls:RadialMenuItem Command="{Binding Test5}">
+                    <WrapPanel Orientation="Vertical">
+                        <Rectangle Width="20" Height="25">
+                            <Rectangle.Fill>
+                                <VisualBrush Visual="{StaticResource appbar_page}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock FontSize="14" TextAlignment="Center">
+                            Nouvelle page
+                        </TextBlock>
+                    </WrapPanel>
+                </controls:RadialMenuItem>
+                <controls:RadialMenuItem Command="{Binding Test5}">
+                    <WrapPanel Orientation="Vertical">
+                        <Rectangle Width="20" Height="25">
+                            <Rectangle.Fill>
+                                <VisualBrush Visual="{StaticResource appbar_page}"/>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock FontSize="14" TextAlignment="Center">
+                            Nouvelle page
+                        </TextBlock>
+                    </WrapPanel>
+                </controls:RadialMenuItem>
 					<controls:RadialMenuItem Command="{Binding Test6}">
 						<WrapPanel Orientation="Vertical">
 							<Rectangle Width="19" Height="26">

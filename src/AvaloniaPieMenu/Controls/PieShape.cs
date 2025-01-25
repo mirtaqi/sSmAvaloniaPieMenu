@@ -14,7 +14,7 @@ internal class PieShape : Shape
 {
     public PieShape()
     {
-        //this.RenderTransform = new RotateTransform(45);
+        
     }
     public static readonly StyledProperty<  double> InnerRadiusProperty =
         AvaloniaProperty.Register<PieShape, double>(
@@ -151,11 +151,12 @@ internal class PieShape : Shape
             DrawGeometry(context);
         }
 
-       
+
         // Freezes the geometry for performance benefits
         //geometry.Freeze();
-            
 
+        this.RenderTransform = new RotateTransform(StartAngle);
+        this.RenderTransformOrigin = new RelativePoint(CenterX, CenterY,RelativeUnit.Absolute);
         return geometry;
     }
     /// <summary>
@@ -192,9 +193,9 @@ internal class PieShape : Shape
             return;
         }
 
-        double outerStartAngle = StartAngle;
+        double outerStartAngle = 0;
         double outerAngleDelta = AngleDelta;
-        double innerStartAngle = StartAngle;
+        double innerStartAngle = 0;
         double innerAngleDelta = AngleDelta;
         Point arcCenter = new Point(CenterX, CenterY);
         Size outerArcSize = new Size(OuterRadius, OuterRadius);
