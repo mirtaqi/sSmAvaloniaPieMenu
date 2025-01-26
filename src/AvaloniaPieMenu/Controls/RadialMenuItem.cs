@@ -1,9 +1,15 @@
 ﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
+using Avalonia.Controls.Templates;
 using Avalonia.Data;
+using Avalonia.Interactivity;
 using Avalonia.Media;
+using Avalonia.VisualTree;
 
 namespace AvaloniaPieMenu.Controls
 {
@@ -280,7 +286,7 @@ namespace AvaloniaPieMenu.Controls
         
         static RadialMenuItem()
         {
-
+            
         }
         public static readonly StyledProperty<RadialMenuItem?> ParentMenuItemProperty =
             AvaloniaProperty.Register<RadialMenuItem, RadialMenuItem?>(
@@ -315,13 +321,23 @@ namespace AvaloniaPieMenu.Controls
             this.Rotation = rotation;
             ContentRotation= rotation + 180;
             Debug.WriteLine($"item{Index} : bounds:{Bounds}");
+            
+        }
+
+        protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
+        {
+            base.OnApplyTemplate(e);
+             
 
         }
 
         protected override void OnSizeChanged(SizeChangedEventArgs e)
         {
+            
             base.OnSizeChanged(e);
-            Debug.WriteLine($"item{Index} : bounds:{Bounds}");
+            
+            
+            //Debug.WriteLine($"item{Index} : bounds:{Bounds}");
         }
 
         public RadialMenuItem()
@@ -329,5 +345,28 @@ namespace AvaloniaPieMenu.Controls
             
         }
 
+        protected override void OnLoaded(RoutedEventArgs e)
+        {
+           
+            base.OnLoaded(e);
+
+
+            var r = Rotation;
+            Rotation = -5;
+            Rotation = r;
+            UpdateItemRendering();
+        }
+
+        protected override void OnClick()
+        {
+            var rm = this.GetVisualAncestors().FirstOrDefault(u => u is RadialMenu rm) as RadialMenu;
+            if (rm != null && this.SubMenuItems.Any())
+            {
+                rm.SelectMenuItem(this);
+            }
+            base.OnClick();
+        }
+
+         
     }
 }

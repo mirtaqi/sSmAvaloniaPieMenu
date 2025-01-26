@@ -18,7 +18,7 @@ namespace AvaloniaPieMenu.Controls
 
         private void Items_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            if (Items.All(m => m is RadialMenuItem rmi && rmi.ParentMenuItem is null))
+            if (Items.Any() && Items.All(m => m is RadialMenuItem rmi && rmi.ParentMenuItem is null))
             {
                 TopLevelMenuItems = this.Items.Cast<RadialMenuItem>().ToArray();
             }
@@ -70,6 +70,36 @@ namespace AvaloniaPieMenu.Controls
             set { SetValue(SelectedMenuItemProperty, value); }
         }
 
+        public void SelectMenuItem(RadialMenuItem? rmi)
+        {
+            SelectedMenuItem= rmi;
+            if (SelectedMenuItem is not null)
+            {
+                Items.Clear();
+                foreach (var radialMenuItem in SelectedMenuItem.SubMenuItems)
+                {
+                    Items.Add(radialMenuItem);
+                }
+            }
+            else
+            {
+                Items.Clear();
+                foreach (var radialMenuItem in TopLevelMenuItems)
+                {
+                    Items.Add(radialMenuItem);
+                }
+            }
+            //this.InvalidateArrange();
+            //IsOpen=false;
+            //IsOpen = true;
+            this.InvalidateArrange();
+            this.InvalidateMeasure();
+            this.InvalidateVisual();
+            //IsOpen = false;
+            //IsOpen= true;
+            // this.InvalidateMeasure();
+            //this.inva
+        }
         //public new  static readonly StyledProperty<List<RadialMenuItem>> ContentProperty =
         //    AvaloniaProperty.Register<RadialMenu, List<RadialMenuItem>>(
         //        nameof(Content),defaultValue:new List<RadialMenuItem>(), defaultBindingMode:BindingMode.TwoWay);

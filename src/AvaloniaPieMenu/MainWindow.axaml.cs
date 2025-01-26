@@ -21,18 +21,18 @@ namespace AvaloniaPieMenu
             var mdIcon = new[] { "ab-testing", "abacus", "abjad-arabic", "account-box-multiple", "account-child-circle", "account-details", "airplane", "alpha-a-box-outline" };
             var r = new Random();
             var items = new List<RadialMenuItem>();
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 6; i++)
             {
                 var item = new RadialMenuItem()
                 {
                     Icon = new Projektanker.Icons.Avalonia.Icon()
                     {
                         Value = $"mdi-{mdIcon[r.Next(0,mdIcon.Length)]}",
-                        FontSize = 32
+                        FontSize = 24
                     },
                     Content = new TextBlock() { Text = $"Item {i}" }
                 };
-                for (int j = 0; j < 9; j++)
+                for (int j = 0; j < 6; j++)
                 {
                     var subItem = new RadialMenuItem()
                     {
@@ -189,6 +189,11 @@ namespace AvaloniaPieMenu
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        private void Bor___OnSizeChanged(object? sender, SizeChangedEventArgs e)
+        {
+            Debug.WriteLine($"new size : {e.NewSize}");
         }
     }
 }

@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:AvaloniaPieMenu.Controls"
+		xmlns:icon="https://github.com/projektanker/icons.avalonia"
         xmlns:local="clr-namespace:AvaloniaPieMenu"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="AvaloniaPieMenu.MainWindow"
@@ -22,8 +23,10 @@
 		</Grid>
 
 		<Grid Grid.Row="1"  >
-			<controls:RadialMenu x:Name="RadialMenu"  Width="300" Height="300"
-                IsOpen="{Binding IsOpen1}" >
+			<Border x:Name="bor
+" SizeChanged="Bor___OnSizeChanged" BorderThickness="1" BorderBrush="Red" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <controls:RadialMenu x:Name="RadialMenu"  Width="300" Height="300"
+                                 IsOpen="{Binding IsOpen1}" >
 
 				<!--<controls:RadialMenu.ItemTemplate>
 					<DataTemplate>
@@ -34,12 +37,8 @@
                     </DataTemplate>
                 </controls:RadialMenu.ItemTemplate>-->
 				<controls:RadialMenu.CentralItem>
-					<controls:RadialMenuCentralItem Command="{Binding CloseRadialMenu1}">
-						<Rectangle Width="25" Height="25">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_close}"/>
-							</Rectangle.Fill>
-						</Rectangle>
+					<controls:RadialMenuCentralItem Background="DodgerBlue" >
+						<icon:Icon Value="mdi-close"></icon:Icon>
 					</controls:RadialMenuCentralItem>
 				</controls:RadialMenu.CentralItem>
 
@@ -146,6 +145,7 @@
 					</controls:RadialMenuItem>-->
 			 
 			</controls:RadialMenu>
+            </Border>
 		</Grid>
 
 		<Grid Grid.Row="1">
