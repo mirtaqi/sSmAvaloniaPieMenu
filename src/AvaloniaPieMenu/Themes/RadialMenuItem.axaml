@@ -32,7 +32,7 @@
 
 		<Setter Property="Background">
 			<Setter.Value>
-				<RadialGradientBrush  Center="0%,100%"  RadiusX="107%" RadiusY="100%"  GradientOrigin="0%,100%"  >
+				<RadialGradientBrush   >
 					
 
                     <RadialGradientBrush.GradientStops>
@@ -40,7 +40,7 @@
                             <GradientStop Color="Blue" Offset="0"/>
                             <GradientStop Color="MediumVioletRed" Offset="0.49"/>
                             <GradientStop Color="CornflowerBlue" Offset="0.51"/>
-                            <GradientStop Color="DodgerBlue" Offset="0.99"/>
+                            <GradientStop Color="DodgerBlue" Offset="0.7"/>
                             <GradientStop Color="Green" Offset="1"/>
                         </GradientStops>
 					</RadialGradientBrush.GradientStops>

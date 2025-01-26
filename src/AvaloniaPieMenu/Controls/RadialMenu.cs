@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
@@ -39,6 +40,15 @@ namespace AvaloniaPieMenu.Controls
             set { SetValue(CentralItemProperty, value); }
         }
 
+        public static readonly StyledProperty<RadialMenuItem[]?> TopLevelMenuItemsProperty = AvaloniaProperty.Register<RadialMenu, RadialMenuItem[]?>(
+            nameof(TopLevelMenuItems), defaultBindingMode: BindingMode.OneWay);
+
+        public RadialMenuItem[]? TopLevelMenuItems
+        {
+            get { return (RadialMenuItem[]?)GetValue(TopLevelMenuItemsProperty); }
+            private set { SetValue(TopLevelMenuItemsProperty, value); }
+        }
+
         //public new  static readonly StyledProperty<List<RadialMenuItem>> ContentProperty =
         //    AvaloniaProperty.Register<RadialMenu, List<RadialMenuItem>>(
         //        nameof(Content),defaultValue:new List<RadialMenuItem>(), defaultBindingMode:BindingMode.TwoWay);
@@ -49,16 +59,24 @@ namespace AvaloniaPieMenu.Controls
         //    set { SetValue(ContentProperty, value); }
         //}
 
-      
+
         static RadialMenu()
         {
-
+            
         }
+        
 
         public override void BeginInit()
         {
             //Content = new List<RadialMenuItem>();
             base.BeginInit();
+            
+        }
+
+        public override void EndInit()
+        {
+            base.EndInit();
+            TopLevelMenuItems = this.Items.Cast<RadialMenuItem>().ToArray();
         }
 
         protected override Size ArrangeOverride(Size arrangeSize)
@@ -70,6 +88,13 @@ namespace AvaloniaPieMenu.Controls
                 item.Index = i;
                 item.Count = count;
                 item.HalfShifted = HalfShiftedItems;
+                item.Width = this.Width;
+                item.Height= this.Height;
+                item.CenterX = this.Width / 2;
+                item.CenterY=this.Height / 2;
+                item.OuterRadius = this.Width / 2;
+                item.EdgeInnerRadius = item.OuterRadius - 20;
+                item.EdgeOuterRadius = item.OuterRadius;
             }
             return base.ArrangeOverride(arrangeSize);
         }

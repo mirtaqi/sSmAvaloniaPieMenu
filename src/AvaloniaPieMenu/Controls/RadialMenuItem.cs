@@ -1,4 +1,5 @@
-﻿using Avalonia;
+﻿using System.Collections.ObjectModel;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
 using Avalonia.Media;
@@ -263,12 +264,21 @@ namespace AvaloniaPieMenu.Controls
             get { return (double)GetValue(RotationProperty); }
             protected set { SetValue(RotationProperty, value); }
         }
-
+        public ObservableCollection<RadialMenuItem> SubMenuItems { get; private set; }=new ObservableCollection<RadialMenuItem>();
+        
         static RadialMenuItem()
         {
 
         }
+        public static readonly StyledProperty<RadialMenuItem?> ParentMenuItemProperty =
+            AvaloniaProperty.Register<RadialMenuItem, RadialMenuItem?>(
+                nameof(Rotation), defaultBindingMode: BindingMode.TwoWay);
 
+        public RadialMenuItem? ParentMenuItem
+        {
+            get { return (RadialMenuItem?)GetValue(ParentMenuItemProperty); }
+            protected set { SetValue(ParentMenuItemProperty, value); }
+        }
         private void UpdateItemRendering()
         {
             if(this.Count==0)

@@ -4,6 +4,7 @@ using Avalonia;
 using Avalonia.Controls.Shapes;
 using Avalonia.Data;
 using Avalonia.Media;
+using Avalonia.Media.Immutable;
 
 namespace AvaloniaPieMenu.Controls;
 
@@ -138,6 +139,7 @@ internal class PieShape : Shape
         }
     }
 
+    private IBrush? _fillBrush;
     protected override Geometry? CreateDefiningGeometry()
     {
         //Creates a StreamGeometry for describing the shape
@@ -157,6 +159,40 @@ internal class PieShape : Shape
 
         this.RenderTransform = new RotateTransform(StartAngle);
         this.RenderTransformOrigin = new RelativePoint(CenterX, CenterY,RelativeUnit.Absolute);
+        if (this.Fill is RadialGradientBrush radialGradientBrush)
+        {
+            
+           
+                var newBrush = new RadialGradientBrush();
+                _fillBrush=radialGradientBrush;
+                if (radialGradientBrush.GradientStops.Count > 0)
+                {
+                    //var first = radialGradientBrush.GradientStops[0];
+                    //radialGradientBrush.GradientStops.Insert(0,new GradientStop(first.Color,first.Offset));
+                    var startOffset = InnerRadius / OuterRadius;
+                    var endOffset = 1;
+                    var ratio = endOffset - startOffset;
+                    foreach (var gradientStop in radialGradientBrush.GradientStops)
+                    {
+                        newBrush.GradientStops.Add(new GradientStop(gradientStop.Color, startOffset + gradientStop.Offset * ratio));
+                        //gradientStop.Offset = startOffset + gradientStop.Offset * ratio;
+                    }
+                }
+                Point arcCenter = new Point(CenterX, CenterY);
+                var brushCenter = ComputeCartesianCoordinate(arcCenter, AngleDelta / 2,
+                    Math.Cos(AngleDelta / 180d * Math.PI / 2) * InnerRadius);
+                newBrush.Center = new RelativePoint(arcCenter, RelativeUnit.Absolute);
+                newBrush.GradientOrigin = new RelativePoint(arcCenter, RelativeUnit.Absolute);
+                newBrush.RadiusX = new RelativeScalar( OuterRadius, RelativeUnit.Absolute);
+                newBrush.RadiusY = new RelativeScalar( OuterRadius, RelativeUnit.Absolute);
+
+                this.Fill = newBrush;
+                _fillBrush = newBrush;
+            
+          
+            
+            //radialGradientBrush.
+        }
         return geometry;
     }
     /// <summary>
