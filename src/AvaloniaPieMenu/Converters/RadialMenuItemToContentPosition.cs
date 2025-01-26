@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using Avalonia;
+using Avalonia.Controls.Templates;
 using Avalonia.Data.Converters;
+using Avalonia.VisualTree;
+using AvaloniaPieMenu.Controls;
 
 namespace AvaloniaPieMenu.Converters;
 
@@ -11,7 +15,7 @@ internal class RadialMenuItemToContentPosition : IMultiValueConverter
 {
     public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
     {
-        if (values.Count != 6)
+        if (values.Count!=6)
         {
             throw new ArgumentException("RadialMenuItemToContentPosition converter needs 6 values (double angle, double centerX, double centerY, double contentWidth, double contentHeight, double contentRadius) !", "values");
         }
@@ -26,7 +30,7 @@ internal class RadialMenuItemToContentPosition : IMultiValueConverter
         {
             throw new ArgumentException("RadialMenuItemToContentPosition parameter needs to be 'X' or 'Y' !", "parameter");
         }
-        if (values.Any(u => u.GetType() == typeof(UnsetValueType)))
+        if (values.Any(u => u is null || u.GetType() == typeof(UnsetValueType)))
         {
             return null;
         }
@@ -37,14 +41,18 @@ internal class RadialMenuItemToContentPosition : IMultiValueConverter
         double contentHeight = (double)values[4];
         double contentRadius = (double)values[5];
 
+        //contentWidth = 60;
+        //contentHeight = 50;
+
+
         Point contentPosition = ComputeCartesianCoordinate(new Point(centerX, centerY), angle, contentRadius);
 
         if (axis == "X")
         {
-            return contentPosition.X - (contentWidth / 2);
+            return contentPosition.X- (contentWidth/ 2);
         }
 
-        return contentPosition.Y - (contentHeight / 2);
+        return contentPosition.Y- (contentHeight / 2);
     }
 
     public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

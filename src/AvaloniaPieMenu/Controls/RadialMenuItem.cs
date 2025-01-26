@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
@@ -264,6 +265,17 @@ namespace AvaloniaPieMenu.Controls
             get { return (double)GetValue(RotationProperty); }
             protected set { SetValue(RotationProperty, value); }
         }
+
+        public static readonly StyledProperty<object?> IconProperty =
+            AvaloniaProperty.Register<RadialMenuItem, object?>(
+                nameof(Icon), defaultBindingMode: BindingMode.TwoWay);
+
+        public object? Icon
+        {
+            get { return (object?)GetValue(IconProperty); }
+            set { SetValue(IconProperty, value); }
+        }
+
         public ObservableCollection<RadialMenuItem> SubMenuItems { get; private set; }=new ObservableCollection<RadialMenuItem>();
         
         static RadialMenuItem()
@@ -277,8 +289,18 @@ namespace AvaloniaPieMenu.Controls
         public RadialMenuItem? ParentMenuItem
         {
             get { return (RadialMenuItem?)GetValue(ParentMenuItemProperty); }
-            protected set { SetValue(ParentMenuItemProperty, value); }
+            set { SetValue(ParentMenuItemProperty, value); }
         }
+        public static readonly StyledProperty<double> ContentRotationProperty =
+            AvaloniaProperty.Register<RadialMenuItem, double>(
+                nameof(ContentRotation), defaultBindingMode: BindingMode.OneWay);
+
+        public double ContentRotation
+        {
+            get { return (double)GetValue(ContentRotationProperty); }
+            protected set { SetValue(ContentRotationProperty, value); }
+        }
+
         private void UpdateItemRendering()
         {
             if(this.Count==0)
@@ -286,11 +308,26 @@ namespace AvaloniaPieMenu.Controls
             var angleDelta = 360.0 / this.Count;
             var angleShift = this.HalfShifted ? -angleDelta / 2 : 0;
             var startAngle = angleDelta * this.Index + angleShift;
-            var rotation = startAngle + angleDelta / 2;
+            var rotation = startAngle + (angleDelta / 2d);
 
             this.AngleDelta = angleDelta;
             this.StartAngle = startAngle;
             this.Rotation = rotation;
+            ContentRotation= rotation + 180;
+            Debug.WriteLine($"item{Index} : bounds:{Bounds}");
+
         }
+
+        protected override void OnSizeChanged(SizeChangedEventArgs e)
+        {
+            base.OnSizeChanged(e);
+            Debug.WriteLine($"item{Index} : bounds:{Bounds}");
+        }
+
+        public RadialMenuItem()
+        {
+            
+        }
+
     }
 }

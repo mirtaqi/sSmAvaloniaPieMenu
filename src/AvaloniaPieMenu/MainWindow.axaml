@@ -22,9 +22,17 @@
 		</Grid>
 
 		<Grid Grid.Row="1"  >
-			<controls:RadialMenu x:Name="RadialMenu" 
+			<controls:RadialMenu x:Name="RadialMenu"  Width="300" Height="300"
                 IsOpen="{Binding IsOpen1}" >
 
+				<!--<controls:RadialMenu.ItemTemplate>
+					<DataTemplate>
+						<StackPanel>
+							<ContentControl Content="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=controls:RadialMenuItem},Path=Icon}"></ContentControl>
+                            <ContentControl Content="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=controls:RadialMenuItem},Path=Content}"></ContentControl>
+                        </StackPanel>
+                    </DataTemplate>
+                </controls:RadialMenu.ItemTemplate>-->
 				<controls:RadialMenu.CentralItem>
 					<controls:RadialMenuCentralItem Command="{Binding CloseRadialMenu1}">
 						<Rectangle Width="25" Height="25">
@@ -75,7 +83,7 @@
 						</WrapPanel>
 					</controls:RadialMenuItem>
 -->
-					<controls:RadialMenuItem Command="{Binding Test4}">
+					<!--<controls:RadialMenuItem Command="{Binding Test4}">
 						<WrapPanel Orientation="Vertical">
 							<Rectangle Width="20" Height="25">
 								<Rectangle.Fill>
@@ -135,7 +143,7 @@
 								Partager
 							</TextBlock>
 						</WrapPanel>
-					</controls:RadialMenuItem>
+					</controls:RadialMenuItem>-->
 			 
 			</controls:RadialMenu>
 		</Grid>

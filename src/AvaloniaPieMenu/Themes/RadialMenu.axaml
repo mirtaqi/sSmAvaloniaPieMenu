@@ -5,8 +5,8 @@
 		<!-- Default RadialMenu style (while closed) -->
 		<Setter Property="Opacity" Value="0"/>
 		<Setter Property="IsVisible" Value="{Binding RelativeSource={RelativeSource Self},Path=IsOpen}"/>
-		<Setter Property="Height" Value="400"/>
-		<Setter Property="Width" Value="400"/>
+		<Setter Property="Height" Value="300"/>
+		<Setter Property="Width" Value="300"/>
         <!--<Setter Property="BorderThickness" Value="8"/>
 		<Setter Property="BorderBrush" Value="DarkOrchid"></Setter>-->
 		<!--<Setter Property="RenderTransform">

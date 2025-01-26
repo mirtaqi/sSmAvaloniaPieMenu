@@ -157,8 +157,8 @@ internal class PieShape : Shape
         // Freezes the geometry for performance benefits
         //geometry.Freeze();
 
-        this.RenderTransform = new RotateTransform(StartAngle);
-        this.RenderTransformOrigin = new RelativePoint(CenterX, CenterY,RelativeUnit.Absolute);
+        //this.RenderTransform = new RotateTransform(StartAngle);
+        //this.RenderTransformOrigin = new RelativePoint(CenterX, CenterY,RelativeUnit.Absolute);
         if (this.Fill is RadialGradientBrush radialGradientBrush)
         {
             
@@ -229,9 +229,9 @@ internal class PieShape : Shape
             return;
         }
 
-        double outerStartAngle = 0;
+        double outerStartAngle = StartAngle;
         double outerAngleDelta = AngleDelta;
-        double innerStartAngle = 0;
+        double innerStartAngle = StartAngle;
         double innerAngleDelta = AngleDelta;
         Point arcCenter = new Point(CenterX, CenterY);
         Size outerArcSize = new Size(OuterRadius, OuterRadius);

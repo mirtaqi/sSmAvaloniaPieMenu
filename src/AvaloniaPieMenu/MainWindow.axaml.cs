@@ -1,25 +1,59 @@
+using System;
+using System.Collections.Generic;
 using Avalonia.Controls;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Avalonia.Input;
+using AvaloniaPieMenu.Controls;
 using CommunityToolkit.Mvvm.Input;
 
 namespace AvaloniaPieMenu
 {
-    public partial class MainWindow : Window,INotifyPropertyChanged
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         public MainWindow()
         {
             DataContext = this;
             this.PointerPressed += MainWindow_PointerPressed;
             InitializeComponent();
-            
-            
+            var mdIcon = new[] { "ab-testing", "abacus", "abjad-arabic", "account-box-multiple", "account-child-circle", "account-details", "airplane", "alpha-a-box-outline" };
+            var r = new Random();
+            var items = new List<RadialMenuItem>();
+            for (int i = 0; i < 8; i++)
+            {
+                var item = new RadialMenuItem()
+                {
+                    Icon = new Projektanker.Icons.Avalonia.Icon()
+                    {
+                        Value = $"mdi-{mdIcon[r.Next(0,mdIcon.Length)]}",
+                        FontSize = 32
+                    },
+                    Content = new TextBlock() { Text = $"Item {i}" }
+                };
+                for (int j = 0; j < 9; j++)
+                {
+                    var subItem = new RadialMenuItem()
+                    {
+                        ParentMenuItem = item,
+                        Icon = new Projektanker.Icons.Avalonia.Icon()
+                        {
+                            Value = $"mdi-{mdIcon[r.Next(0, mdIcon.Length)]}",
+                            FontSize = 32
+                        },
+                        Content = new TextBlock() { Text = $"Sub Item {i}" }
+                    };
+                    item.SubMenuItems.Add(subItem);
+                }
+
+                RadialMenu.Items.Add(item);
+            }
+
         }
 
-      
+
+
         private bool _isOpen1 = false;
         public bool IsOpen1
         {
@@ -145,7 +179,7 @@ namespace AvaloniaPieMenu
             }
         }
 
-        
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

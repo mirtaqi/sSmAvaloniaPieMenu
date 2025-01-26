@@ -19,7 +19,7 @@
 		<Style Selector="^:pointerover">
 			<Setter Property="EdgeBackground" Value="#999"/>
 			<Setter Property="ZIndex" Value="10"/>
-			
+
 		</Style>
 		<Style Selector="^:pressed">
 			<Setter Property="EdgeBackground" Value="#666"/>
@@ -33,20 +33,19 @@
 		<Setter Property="Background">
 			<Setter.Value>
 				<RadialGradientBrush   >
-					
 
-                    <RadialGradientBrush.GradientStops>
-                        <GradientStops>
-                            <GradientStop Color="Blue" Offset="0"/>
-                            <GradientStop Color="MediumVioletRed" Offset="0.49"/>
-                            <GradientStop Color="CornflowerBlue" Offset="0.51"/>
-                            <GradientStop Color="DodgerBlue" Offset="0.7"/>
-                            <GradientStop Color="Green" Offset="1"/>
-                        </GradientStops>
+
+					<RadialGradientBrush.GradientStops>
+						<GradientStops>
+							<GradientStop Color="#16222A" Offset="0"/>
+							<GradientStop Color="#3A6073" Offset="0.51"/>
+							 
+							<GradientStop Color="#16222A" Offset="1"/>
+						</GradientStops>
 					</RadialGradientBrush.GradientStops>
-                </RadialGradientBrush>
-            </Setter.Value>
-        </Setter>
+				</RadialGradientBrush>
+			</Setter.Value>
+		</Setter>
 
 		<!-- Default RadialMenuItem style -->
 		<Setter Property="Width" Value="300"/>
@@ -59,13 +58,56 @@
 		<Setter Property="EdgeOuterRadius" Value="150"/>
 		<Setter Property="EdgeBackground" Value="#CCC"/>
 		<Setter Property="EdgePadding" Value="2"/>
-		<Setter Property="ContentRadius" Value="82.5"/>
+		<Setter Property="ContentRadius" Value="50"/>
 		<Setter Property="ArrowBackground" Value="#FFF"/>
 		<Setter Property="ArrowRadius" Value="142.5"/>
 		<Setter Property="ArrowWidth" Value="14"/>
 		<Setter Property="ArrowHeight" Value="14"/>
 		<Setter Property="ZIndex" Value="0"/>
 
+		<Setter Property="ContentTemplate">
+			<Setter.Value>
+				<DataTemplate>
+                    <StackPanel x:Name="StackPanel" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <StackPanel.RenderTransformOrigin>25%,25%</StackPanel.RenderTransformOrigin>
+                        <StackPanel.RenderTransform>
+                            <RotateTransform
+									
+                                Angle="{Binding ContentRotation, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:RadialMenuItem}}"
+                            />
+                        </StackPanel.RenderTransform>
+
+                        <ContentControl HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        VerticalContentAlignment="Center"
+                                        HorizontalContentAlignment="Center"
+                                        Margin="5"
+                                        Content="{Binding Icon,RelativeSource={RelativeSource FindAncestor, AncestorType=controls:RadialMenuItem}}">
+
+
+
+                        </ContentControl>
+                        <ContentControl HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        VerticalContentAlignment="Center"
+                                        HorizontalContentAlignment="Center"
+                                        Margin="5"
+                                        Content="{Binding Content,RelativeSource={RelativeSource FindAncestor, AncestorType=controls:RadialMenuItem}}">
+                            <ContentControl.RenderTransform>
+                                <RotateTransform
+									
+                                    Angle="90"
+                                />
+                            </ContentControl.RenderTransform>
+
+                        </ContentControl>
+                    </StackPanel>
+
+				</DataTemplate>
+            </Setter.Value>
+        </Setter>
+		
+		
 		<!-- RadialMenuItem template -->
 		<Setter Property="Template">
 			<Setter.Value>
@@ -99,7 +141,7 @@
 							StartAngle="{TemplateBinding StartAngle}"
 							AngleDelta="{TemplateBinding AngleDelta}"/>
 
-						
+
 						<!-- Edge content (arrow) -->
 						<Canvas>
 
@@ -153,18 +195,19 @@
 
 						<!-- Main content -->
 
-						<ContentControl Content="{TemplateBinding Content}">
+						<Grid >
+							
 
-							<Canvas.Left>
+                            <Canvas.Left>
 								<MultiBinding Converter="{StaticResource RadialMenuItemToContentPosition}" ConverterParameter="X">
 
-									 
+
 
 									<Binding Path="Rotation" RelativeSource="{RelativeSource TemplatedParent}"/>
 									<Binding Path="CenterX" RelativeSource="{RelativeSource TemplatedParent}"/>
 									<Binding Path="CenterY" RelativeSource="{RelativeSource TemplatedParent}"/>
 									<Binding RelativeSource="{RelativeSource TemplatedParent}" Path="((Visual)Content).Bounds.Width"></Binding>
-                                    <Binding RelativeSource="{RelativeSource TemplatedParent}"  Path="((Visual)Content).Bounds.Height"></Binding>
+									<Binding RelativeSource="{RelativeSource TemplatedParent}"  Path="((Visual)Content).Bounds.Height"></Binding>
 
 									<Binding Path="ContentRadius" RelativeSource="{RelativeSource TemplatedParent}"/>
 								</MultiBinding>
@@ -181,19 +224,19 @@
 									<TemplateBinding   Property="Content.((Rect)Bounds).Width"></TemplateBinding>
 									<TemplateBinding   Property="Content.((Rect)Bounds).Height"></TemplateBinding>
 									<TemplateBinding Property="ContentRadius"></TemplateBinding>-->
-									
+
 									<Binding Path="Rotation" RelativeSource="{RelativeSource TemplatedParent}"/>
 									<Binding Path="CenterX" RelativeSource="{RelativeSource TemplatedParent}"/>
 									<Binding Path="CenterY" RelativeSource="{RelativeSource TemplatedParent}"/>
-                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="((Visual)Content).Bounds.Width"></Binding>
-                                    <Binding RelativeSource="{RelativeSource TemplatedParent}"  Path="((Visual)Content).Bounds.Height"></Binding>
-
+									<Binding RelativeSource="{RelativeSource TemplatedParent}" Path="((Visual)Content).Bounds.Width"></Binding>
+									<Binding RelativeSource="{RelativeSource TemplatedParent}"  Path="((Visual)Content).Bounds.Height"></Binding>
+    
 									<Binding Path="ContentRadius" RelativeSource="{RelativeSource TemplatedParent}"/>
+									
 								</MultiBinding>
 							</Canvas.Top>
-
-						</ContentControl>
-
+						<ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}"></ContentPresenter>
+						</Grid>
 					</Canvas>
 				</ControlTemplate>
 

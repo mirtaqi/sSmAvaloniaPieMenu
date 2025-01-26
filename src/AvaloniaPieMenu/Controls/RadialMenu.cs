@@ -11,6 +11,19 @@ namespace AvaloniaPieMenu.Controls
     /// </summary>
     public class RadialMenu : ItemsControl
     {
+        public RadialMenu()
+        {
+            Items.CollectionChanged += Items_CollectionChanged;
+        }
+
+        private void Items_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (Items.All(m => m is RadialMenuItem rmi && rmi.ParentMenuItem is null))
+            {
+                TopLevelMenuItems = this.Items.Cast<RadialMenuItem>().ToArray();
+            }
+        }
+
         public static readonly StyledProperty< bool> IsOpenProperty =
             AvaloniaProperty.Register<RadialMenu, bool>(
                 nameof(IsOpen),defaultBindingMode:BindingMode.TwoWay);
@@ -48,6 +61,14 @@ namespace AvaloniaPieMenu.Controls
             get { return (RadialMenuItem[]?)GetValue(TopLevelMenuItemsProperty); }
             private set { SetValue(TopLevelMenuItemsProperty, value); }
         }
+        public static readonly StyledProperty<RadialMenuItem?> SelectedMenuItemProperty = AvaloniaProperty.Register<RadialMenu, RadialMenuItem?>(
+        nameof(SelectedMenuItem), defaultBindingMode: BindingMode.OneWay);
+
+        public RadialMenuItem? SelectedMenuItem
+        {
+            get { return (RadialMenuItem?)GetValue(SelectedMenuItemProperty); }
+            set { SetValue(SelectedMenuItemProperty, value); }
+        }
 
         //public new  static readonly StyledProperty<List<RadialMenuItem>> ContentProperty =
         //    AvaloniaProperty.Register<RadialMenu, List<RadialMenuItem>>(
@@ -76,7 +97,6 @@ namespace AvaloniaPieMenu.Controls
         public override void EndInit()
         {
             base.EndInit();
-            TopLevelMenuItems = this.Items.Cast<RadialMenuItem>().ToArray();
         }
 
         protected override Size ArrangeOverride(Size arrangeSize)
