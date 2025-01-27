@@ -35,8 +35,13 @@ internal class RadialMenuItemToContentPosition : IMultiValueConverter
         {
             return null;
         }
+        
         double angle = (double)values[0];
-        double centerX = (double)values[1];
+        if (angle < 0)
+        {
+            return 0d;
+        }
+            double centerX = (double)values[1];
         double centerY = (double)values[2];
         double contentWidth = (double)values[3];
         double contentHeight = (double)values[4];
@@ -61,10 +66,10 @@ internal class RadialMenuItemToContentPosition : IMultiValueConverter
 
         if (axis == "X")
         {
-            return contentPosition.X - (contentWidth/4 );
+            return contentPosition.X - (contentWidth/2 );
         }
 
-        return contentPosition.Y - (contentHeight/4 );
+        return contentPosition.Y - (contentHeight/2 );
     }
 
     public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

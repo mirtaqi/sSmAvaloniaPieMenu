@@ -345,9 +345,15 @@ namespace AvaloniaPieMenu.Controls
             
         }
 
+        protected override void OnUnloaded(RoutedEventArgs e)
+        {
+            Opacity = 0;
+            base.OnUnloaded(e);
+        }
+
         protected override void OnLoaded(RoutedEventArgs e)
         {
-           
+            Opacity = 1;
             base.OnLoaded(e);
 
 

@@ -2,47 +2,65 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:icon="https://github.com/projektanker/icons.avalonia"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="AvaloniaPieMenu.Window1"
         Title="Window1">
-  
-    <Canvas>
-        
-        <Path Canvas.Left="100" Canvas.Top="100" >
-            <Path.Fill>
-                <RadialGradientBrush Center="0%,0%" GradientOrigin="0%,0%" RadiusX="100%" RadiusY="575%%">
-                    <RadialGradientBrush.GradientStops>
-                        <GradientStop Offset="0" Color="Red"></GradientStop>
-                        <GradientStop Offset="0.3" Color="OrangeRed"></GradientStop>
-                        <GradientStop Offset="0.6" Color="GreenYellow"></GradientStop>
-                        <GradientStop Offset="0.8" Color="DarkGreen"></GradientStop>
-                        <GradientStop Offset="1" Color="Blue"></GradientStop>
-                    </RadialGradientBrush.GradientStops>
-                </RadialGradientBrush>
-            </Path.Fill>
-            <Path.RenderTransformOrigin>
-                <RelativePoint>0,0</RelativePoint>
-            </Path.RenderTransformOrigin>
-            <Path.RenderTransform>
-                <RotateTransform Angle="60" CenterX="0" CenterY="0"></RotateTransform>
-            </Path.RenderTransform>
-            <Path.Data>
-                <PathGeometry>
-                    <PathGeometry.Figures>
-                        <PathFigure StartPoint="0,0"  IsFilled="True">
-                            <PathFigure.Segments>
-                                <LineSegment Point="100,0"></LineSegment>
-                                <ArcSegment Point="98.480775301,17.3648177666" 
-                                            IsLargeArc="False" 
-                                            RotationAngle="0" Size="100,100" 
-                                            SweepDirection="Clockwise"></ArcSegment>
-                                <LineSegment Point="0,0"></LineSegment>
-                            </PathFigure.Segments>
-                        </PathFigure>
 
-                    </PathGeometry.Figures>
-                </PathGeometry>
-            </Path.Data>
-        </Path>
-    </Canvas>
+	<Canvas>
+
+		<Border BorderBrush="Red" BorderThickness="1">
+			<LayoutTransformControl >
+				<LayoutTransformControl.LayoutTransform>
+					<RotateTransform Angle="45"></RotateTransform>
+				</LayoutTransformControl.LayoutTransform>
+				<StackPanel>
+					<icon:Icon Margin="10" Value="mdi-close" VerticalAlignment="Center"  HorizontalAlignment="Center"></icon:Icon>
+					<LayoutTransformControl VerticalAlignment="Center" HorizontalAlignment="Center">
+						<LayoutTransformControl.LayoutTransform>
+							<RotateTransform Angle="270"></RotateTransform>
+                        </LayoutTransformControl.LayoutTransform>
+                        <TextBlock >This is test </TextBlock>
+                    </LayoutTransformControl>
+                </StackPanel>
+			</LayoutTransformControl>
+
+		</Border>
+		<Path Canvas.Left="100" Canvas.Top="100" >
+			<Path.Fill>
+				<RadialGradientBrush Center="0%,0%" GradientOrigin="0%,0%" RadiusX="100%" RadiusY="575%%">
+					<RadialGradientBrush.GradientStops>
+						<GradientStop Offset="0" Color="Red"></GradientStop>
+						<GradientStop Offset="0.3" Color="OrangeRed"></GradientStop>
+						<GradientStop Offset="0.6" Color="GreenYellow"></GradientStop>
+						<GradientStop Offset="0.8" Color="DarkGreen"></GradientStop>
+						<GradientStop Offset="1" Color="Blue"></GradientStop>
+					</RadialGradientBrush.GradientStops>
+				</RadialGradientBrush>
+			</Path.Fill>
+			<Path.RenderTransformOrigin>
+				<RelativePoint>0,0</RelativePoint>
+			</Path.RenderTransformOrigin>
+			<Path.RenderTransform>
+				<RotateTransform Angle="60" CenterX="0" CenterY="0"></RotateTransform>
+			</Path.RenderTransform>
+			<Path.Data>
+				<PathGeometry>
+					<PathGeometry.Figures>
+						<PathFigure StartPoint="0,0"  IsFilled="True">
+							<PathFigure.Segments>
+								<LineSegment Point="100,0"></LineSegment>
+								<ArcSegment Point="98.480775301,17.3648177666"
+                                            IsLargeArc="False"
+                                            RotationAngle="0" Size="100,100"
+                                            SweepDirection="Clockwise"></ArcSegment>
+								<LineSegment Point="0,0"></LineSegment>
+							</PathFigure.Segments>
+						</PathFigure>
+
+					</PathGeometry.Figures>
+				</PathGeometry>
+			</Path.Data>
+		</Path>
+	</Canvas>
 </Window>

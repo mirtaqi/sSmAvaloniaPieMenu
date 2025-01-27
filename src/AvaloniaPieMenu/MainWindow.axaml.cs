@@ -40,9 +40,9 @@ namespace AvaloniaPieMenu
                         Icon = new Projektanker.Icons.Avalonia.Icon()
                         {
                             Value = $"mdi-{mdIcon[r.Next(0, mdIcon.Length)]}",
-                            FontSize = 32
+                            FontSize = 24
                         },
-                        Content = new TextBlock() { Text = $"Sub Item {i}" }
+                        Content = new TextBlock() { Text = $"S{i}" }
                     };
                     item.SubMenuItems.Add(subItem);
                 }

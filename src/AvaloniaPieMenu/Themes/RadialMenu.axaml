@@ -3,7 +3,7 @@
                     xmlns:controls="clr-namespace:AvaloniaPieMenu.Controls">
 	<ControlTheme TargetType="controls:RadialMenu" x:Key="{x:Type controls:RadialMenu}">
 		<!-- Default RadialMenu style (while closed) -->
-		<Setter Property="Opacity" Value="0"/>
+		<Setter Property="Opacity" Value="1"/>
 		<Setter Property="IsVisible" Value="{Binding RelativeSource={RelativeSource Self},Path=IsOpen}"/>
 		<Setter Property="Height" Value="300"/>
 		<Setter Property="Width" Value="300"/>
@@ -17,7 +17,7 @@
 				</TransformGroup>
 			</Setter.Value>
 		</Setter>-->
-		<Style Selector="^[IsOpen=True]">
+		<!--<Style Selector="^[IsOpen=True]">
            
 			<Setter Property="Transitions">
                 <Setter.Value>
@@ -47,7 +47,7 @@
                 </Setter.Value>
             </Setter>
             <Setter Property="Opacity" Value="0"></Setter>
-        </Style>
+        </Style>-->
 
 		<Setter Property="Template">
 			<Setter.Value>

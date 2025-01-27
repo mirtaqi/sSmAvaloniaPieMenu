@@ -4,7 +4,7 @@
                     xmlns:controls="clr-namespace:AvaloniaPieMenu.Controls">
 	<converters:RadialMenuItemToContentPosition x:Key="RadialMenuItemToContentPosition"/>
 	<converters:RadialMenuItemToArrowPosition x:Key="RadialMenuItemToArrowPosition"/>
-    <converters:ContentRotationConverter x:Key="ContentRotationConverter"></converters:ContentRotationConverter>
+	<converters:ContentRotationConverter x:Key="ContentRotationConverter"></converters:ContentRotationConverter>
 	<ControlTheme x:Key="RoundedArrowPath" TargetType="Path">
 		<Setter Property="Data" Value="m 5.427 222.9380 c 3.614 3.617 7.898 5.424 12.848 5.424 l 255.813 0 c 4.952 0 9.233 -1.807 12.85 -5.424 3.617 -3.621 5.424 -7.902 5.424 -12.851 0 -4.948 -1.807 -9.229 -5.424 -12.847 L 159.031 69.3330 c -3.621 -3.617 -7.902 -5.428 -12.85 -5.428 -4.948 0 -9.233 1.811 -12.847 5.428 L 5.427 197.2410 C 1.814 200.8580 0 205.1390 0 210.0880 c 0 4.948 1.814 9.229 5.427 12.85 z"/>
 		<Setter Property="Width" Value="76"/>
@@ -39,7 +39,7 @@
 						<GradientStops>
 							<GradientStop Color="#00d2ff" Offset="0"/>
 							<GradientStop Color=" #3a7bd5" Offset="0.51"/>
-							 
+
 							<GradientStop Color="#00d2ff" Offset="1"/>
 						</GradientStops>
 					</RadialGradientBrush.GradientStops>
@@ -58,66 +58,116 @@
 		<Setter Property="EdgeOuterRadius" Value="150"/>
 		<Setter Property="EdgeBackground" Value="#CCC"/>
 		<Setter Property="EdgePadding" Value="2"/>
-		<Setter Property="ContentRadius" Value="50"/>
+		<Setter Property="ContentRadius" Value="70"/>
 		<Setter Property="ArrowBackground" Value="#FFF"/>
 		<Setter Property="ArrowRadius" Value="142.5"/>
 		<Setter Property="ArrowWidth" Value="14"/>
 		<Setter Property="ArrowHeight" Value="14"/>
 		<Setter Property="ZIndex" Value="0"/>
+        <Setter Property="Opacity" Value="0"/>
+        <Setter Property="Transitions">
+            <Setter.Value>
+                <Transitions>
+                    <!--<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.3"></TransformOperationsTransition>-->
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.3"></DoubleTransition>
+
+                </Transitions>
+            </Setter.Value>
+        </Setter>
+        <!--<Style Selector="^[IsVisible=True]">
+
+            <Setter Property="Transitions">
+                <Setter.Value>
+                    <Transitions>
+                        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.3"></TransformOperationsTransition>
+                        <DoubleTransition Property="Opacity" Duration="0:0:0.3"></DoubleTransition>
+
+                    </Transitions>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Opacity" Value="1"></Setter>
+            <Setter Property="RenderTransform" Value="rotate(0deg) scale(1)">
+
+            </Setter>
+        </Style>
+        <Style Selector="^[IsVisible=False]">
+            <Setter Property="RenderTransform" Value="rotate(45deg) scale(0.5)">
+
+            </Setter>
+            <Setter Property="Transitions">
+                <Setter.Value>
+                    <Transitions>
+                        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.3"></TransformOperationsTransition>
+                        <DoubleTransition Property="Opacity" Duration="0:0:0.3"></DoubleTransition>
+                        <BoolTransition Property="IsVisible" Duration="0:0:0.3"></BoolTransition>
+                    </Transitions>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Opacity" Value="0"></Setter>
+        </Style>-->
+
 
 		<Setter Property="ContentTemplate">
 			<Setter.Value>
 				<DataTemplate>
-					<Border x:Name="PART_RootContainer" BorderThickness="1" BorderBrush="GreenYellow" >
-                    <StackPanel 
-                                VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <StackPanel.RenderTransformOrigin>25%,25%</StackPanel.RenderTransformOrigin>
-                        <StackPanel.RenderTransform>
-                            <RotateTransform
+					<LayoutTransformControl x:Name="PART_RootContainer">
+						<!--<LayoutTransformControl.LayoutTransform>
+							<RotateTransform Angle="{Binding ContentRotation, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:RadialMenuItem}}"></RotateTransform>
+						</LayoutTransformControl.LayoutTransform>-->
+						<StackPanel
+									>
+							<!--<StackPanel.RenderTransformOrigin>25%,25%</StackPanel.RenderTransformOrigin>
+								<StackPanel.RenderTransform>
+									<RotateTransform
 									 
-                                Angle="{Binding ContentRotation, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:RadialMenuItem}}"
+										Angle="{Binding ContentRotation, RelativeSource={RelativeSource FindAncestor, AncestorType=controls:RadialMenuItem}}"
                             />
-                        </StackPanel.RenderTransform>
+								</StackPanel.RenderTransform>-->
 
-                        <ContentControl HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        VerticalContentAlignment="Center"
-                                        HorizontalContentAlignment="Center"
-                                        Margin="0"
-                                        Content="{Binding Icon,RelativeSource={RelativeSource FindAncestor, AncestorType=controls:RadialMenuItem}}">
-
+							<ContentControl HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											
+											Margin="0"
+											Content="{Binding Icon,RelativeSource={RelativeSource FindAncestor, AncestorType=controls:RadialMenuItem}}">
 
 
-                        </ContentControl>
 
-                        <ContentControl HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        VerticalContentAlignment="Center"
-                                        HorizontalContentAlignment="Center"
-                                        Margin="0 20 0 0"
-                                        Content="{Binding Content,RelativeSource={RelativeSource FindAncestor, AncestorType=controls:RadialMenuItem}}">
-                            <ContentControl.RenderTransform>
-                                <RotateTransform
+							</ContentControl>
+
+							<LayoutTransformControl HorizontalAlignment="Center"
+													VerticalAlignment="Center"
+                                                        
+													Margin="5">
+								<!--<LayoutTransformControl.LayoutTransform>
+									<RotateTransform Angle="{Binding Rotation,RelativeSource={RelativeSource FindAncestor, AncestorType=controls:RadialMenuItem},Converter={StaticResource ContentRotationConverter}}"></RotateTransform>
+								</LayoutTransformControl.LayoutTransform>-->
+                                <ContentControl 
+                                    Content="{Binding Content,RelativeSource={RelativeSource FindAncestor, AncestorType=controls:RadialMenuItem}}">
+                                    <!--<ContentControl.RenderTransform>
+										<RotateTransform
 									
-                                    Angle="{Binding Rotation,RelativeSource={RelativeSource FindAncestor, AncestorType=controls:RadialMenuItem},Converter={StaticResource ContentRotationConverter}}"
+											Angle="{Binding Rotation,RelativeSource={RelativeSource FindAncestor, AncestorType=controls:RadialMenuItem},Converter={StaticResource ContentRotationConverter}}"
                                 />
-                            </ContentControl.RenderTransform>
+									</ContentControl.RenderTransform>-->
 
-                        </ContentControl>
-                    </StackPanel>
-                    </Border>
+                                </ContentControl>
+							</LayoutTransformControl>
+							
+						</StackPanel>
+					</LayoutTransformControl>
+
 				</DataTemplate>
-            </Setter.Value>
-        </Setter>
-		
-		
+			</Setter.Value>
+		</Setter>
+
+
 		<!-- RadialMenuItem template -->
 		<Setter Property="Template">
 			<Setter.Value>
 
 				<ControlTemplate TargetType="controls:RadialMenuItem">
-					<Border BorderThickness="1" BorderBrush="DarkGoldenrod">
-                    <Canvas ZIndex="{TemplateBinding Panel.ZIndex}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+
+					<Canvas ZIndex="{TemplateBinding Panel.ZIndex}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
 
 						<!-- Main pie piece -->
 						<controls:PieShape
@@ -149,6 +199,7 @@
 						<!-- Edge content (arrow) -->
 						<Canvas>
 
+
 							<Canvas.RenderTransform>
 								<!-- See : http://stackoverflow.com/a/3190907/2837434 -->
 								<RotateTransform
@@ -167,7 +218,7 @@
 										<Binding Path="ArrowWidth" RelativeSource="{RelativeSource TemplatedParent}"/>
 										<Binding Path="ArrowHeight" RelativeSource="{RelativeSource TemplatedParent}"/>
 										<Binding Path="ArrowRadius" RelativeSource="{RelativeSource TemplatedParent}"/>
-                                        
+
 									</MultiBinding>
 								</Canvas.Left>
 
@@ -178,7 +229,7 @@
 										<Binding Path="ArrowWidth" RelativeSource="{RelativeSource TemplatedParent}"/>
 										<Binding Path="ArrowHeight" RelativeSource="{RelativeSource TemplatedParent}"/>
 										<Binding Path="ArrowRadius" RelativeSource="{RelativeSource TemplatedParent}"/>
-                                        
+
 
 									</MultiBinding>
 								</Canvas.Top>
@@ -202,10 +253,10 @@
 
 						<!-- Main content -->
 
-						<Grid >
-							
+						<Border >
 
-                            <Canvas.Left>
+
+							<Canvas.Left>
 								<MultiBinding Converter="{StaticResource RadialMenuItemToContentPosition}" ConverterParameter="X">
 
 
@@ -217,14 +268,14 @@
 									<Binding RelativeSource="{RelativeSource TemplatedParent}"  Path="((Visual)Content).Bounds.Height"></Binding>
 
 									<Binding Path="ContentRadius" RelativeSource="{RelativeSource TemplatedParent}"/>
-                                    <Binding Path="" RelativeSource="{RelativeSource TemplatedParent}"/>
+									<Binding Path="" RelativeSource="{RelativeSource TemplatedParent}"/>
 								</MultiBinding>
 							</Canvas.Left>
 
 							<Canvas.Top>
 								<MultiBinding
 									 
-                                    Converter="{StaticResource RadialMenuItemToContentPosition}" ConverterParameter="Y">
+									Converter="{StaticResource RadialMenuItemToContentPosition}" ConverterParameter="Y">
 									<!--<TemplateBinding Property="Rotation"></TemplateBinding>
 									<TemplateBinding Property="CenterX"></TemplateBinding>
 									<TemplateBinding Property="CenterY"></TemplateBinding>
@@ -238,15 +289,15 @@
 									<Binding Path="CenterY" RelativeSource="{RelativeSource TemplatedParent}"/>
 									<Binding RelativeSource="{RelativeSource TemplatedParent}" Path="((Visual)Content).Bounds.Width"></Binding>
 									<Binding RelativeSource="{RelativeSource TemplatedParent}"  Path="((Visual)Content).Bounds.Height"></Binding>
-    
+
 									<Binding Path="ContentRadius" RelativeSource="{RelativeSource TemplatedParent}"/>
-                                    <Binding Path="" RelativeSource="{RelativeSource TemplatedParent}"/>
+									<Binding Path="" RelativeSource="{RelativeSource TemplatedParent}"/>
 								</MultiBinding>
 							</Canvas.Top>
-						<ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}"></ContentPresenter>
-						</Grid>
+							<ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}"></ContentPresenter>
+						</Border>
 					</Canvas>
-                    </Border>
+
 				</ControlTemplate>
 
 			</Setter.Value>
